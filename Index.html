@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cafeteria Breakfast Menu</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#f5f6f4;font-family:Arial,sans-serif;color:#202522}
+.wrap{max-width:520px;margin:auto;padding:18px 14px 30px}
+.header{background:#173f2a;color:white;border-radius:20px;padding:22px 20px;margin-bottom:16px}
+.header h1{margin:0 0 6px;font-size:25px} .header p{margin:0;opacity:.85;font-size:14px}
+.section-title{font-size:16px;font-weight:700;margin:18px 4px 10px}
+.card{background:white;border-radius:16px;padding:15px;margin:9px 0;box-shadow:0 2px 10px rgba(0,0,0,.06);cursor:pointer}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.name{font-weight:700;font-size:16px} .veg{color:#16833a;font-size:12px;font-weight:700}
+.kcal{background:#f0f4ef;border-radius:20px;padding:7px 10px;font-size:12px;white-space:nowrap}
+.details{display:none;margin-top:13px;padding-top:13px;border-top:1px solid #e8ebe8;font-size:13px;line-height:1.5}
+.card.open .details{display:block}
+.label{font-weight:700;margin-top:9px} .back{display:none;margin-bottom:12px}
+.back button{border:0;background:#173f2a;color:#fff;padding:9px 14px;border-radius:10px}
+.notice{font-size:11px;color:#68706b;text-align:center;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <h1>Breakfast Menu</h1>
+    <p>Scan • Select your dish • View nutrition & ingredients</p>
+  </div>
+  <div class="section-title">Monday</div>
+  <div id="menu"></div>
+  <div class="notice">Nutrition shown as kcal per 100 g. Allergen information is as provided in the menu source.</div>
+</div>
+<script>
+const menu = [{"name": "Idli", "ingredients": "Rice, urad dal, fenugreek seeds, salt, water", "allergens": "NA", "kcal": 124, "veg": true}, {"name": "Medu Vada", "ingredients": "Urad dal, rice flour, ginger, green chilli, curry leaves, coriander, cumin/pepper, salt, oil", "allergens": "NA", "kcal": 273, "veg": true}, {"name": "Sambar", "ingredients": "Toor dal, vegetables, tamarind, tomato, onion, sambar powder, mustard seeds, curry leaves, spices, oil, salt, Asafotodia", "allergens": "Gluten", "kcal": 66, "veg": true}, {"name": "Coconut Chutney", "ingredients": "Fresh coconut, green chilli, ginger, roasted chana dal, coriander, salt, mustard seeds, curry leaves", "allergens": "NA", "kcal": 242, "veg": true}, {"name": "Mysore Masala Dosa", "ingredients": "Rice, urad dal, fenugreek, potato, onion, green chilli, ginger, mustard seeds, curry leaves, turmeric, spices, oil", "allergens": "NA", "kcal": 204, "veg": true}, {"name": "Tomato Chutney", "ingredients": "Tomato, onion, garlic, red chilli, ginger, curry leaves, mustard seeds, urad dal, oil, salt", "allergens": "NA", "kcal": 62, "veg": true}, {"name": "Kala Channa Masala / Methi Puri", "ingredients": "Kala Channa Masala: black chickpeas, onion, tomato, ginger, garlic, spices, coriander, oil. Methi Puri: wheat flour, fenugreek leaves, spices, salt, oil", "allergens": "Gluten", "kcal": 167, "veg": true}, {"name": "Dalia Upma", "ingredients": "Broken wheat/dalia, vegetables, onion, green chilli, ginger, mustard seeds, curry leaves, urad/chana dal, coriander, oil, salt", "allergens": "Gluten", "kcal": 153, "veg": true}, {"name": "Mint Chutney", "ingredients": "Fresh mint, coriander, green chilli, ginger, lemon juice, roasted chana dal, cumin, salt", "allergens": "Dairy", "kcal": 92, "veg": true}];
+const root=document.getElementById('menu');
+menu.forEach((d,i)=>{
+  const c=document.createElement('div'); c.className='card';
+  c.innerHTML=`<div class="row">
+    <div><div class="name">${d.name}</div><div class="veg">● VEG</div></div>
+    <div class="kcal">${d.kcal} kcal / 100 g</div>
+  </div>
+  <div class="details">
+    <div class="label">Ingredients</div>${d.ingredients}
+    <div class="label">Allergens</div>${d.allergens}
+    <div class="label">Nutrition</div>${d.kcal} kcal per 100 g
+  </div>`;
+  c.onclick=()=>c.classList.toggle('open');
+  root.appendChild(c);
+});
+</script>
+</body>
+</html>
